@@ -1,0 +1,35 @@
+export class AppError extends Error {
+  public code: string;
+  public retryable: boolean;
+  public details?: any;
+
+  constructor(code: string, message: string, retryable = false, details?: any) {
+    super(message);
+    this.name = 'AppError';
+    this.code = code;
+    this.retryable = retryable;
+    this.details = details;
+  }
+}
+
+// Recommended error codes from FR-03
+export const ErrorCodes = {
+  INVALID_ARGUMENT: 'INVALID_ARGUMENT',
+  NOT_CONNECTED: 'NOT_CONNECTED',
+  INSUFFICIENT_GOOGLE_SCOPE: 'INSUFFICIENT_GOOGLE_SCOPE',
+  GOOGLE_REAUTH_REQUIRED: 'GOOGLE_REAUTH_REQUIRED',
+  PERMISSION_DENIED: 'PERMISSION_DENIED',
+  DOCUMENT_NOT_FOUND: 'DOCUMENT_NOT_FOUND',
+  TAB_SELECTION_REQUIRED: 'TAB_SELECTION_REQUIRED',
+  TAB_NOT_FOUND: 'TAB_NOT_FOUND',
+  REVISION_CHANGED: 'REVISION_CHANGED',
+  APPROVAL_REQUIRED: 'APPROVAL_REQUIRED',
+  APPROVAL_REJECTED: 'APPROVAL_REJECTED',
+  APPROVAL_EXPIRED: 'APPROVAL_EXPIRED',
+  ACTION_ALREADY_EXECUTED: 'ACTION_ALREADY_EXECUTED',
+  IDEMPOTENCY_CONFLICT: 'IDEMPOTENCY_CONFLICT',
+  RATE_LIMITED: 'RATE_LIMITED',
+  GOOGLE_API_UNAVAILABLE: 'GOOGLE_API_UNAVAILABLE',
+  OUTCOME_UNKNOWN: 'OUTCOME_UNKNOWN',
+  INTERNAL_ERROR: 'INTERNAL_ERROR',
+};

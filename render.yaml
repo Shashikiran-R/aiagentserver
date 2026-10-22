@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: google-workspace-mcp
+    runtime: node
+    plan: starter # Starter plan recommended for persistent disk support
+    region: oregon # or frankfurt, singapore, ohio
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:http
+    healthCheckPath: /health
+    disk:
+      name: mcp-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: BASE_URL
+        sync: false # Set to https://<your-service-name>.onrender.com
+      - key: GOOGLE_CLIENT_ID
+        sync: false # Enter in Render Dashboard
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false # Enter in Render Dashboard
+      - key: GOOGLE_REDIRECT_URI
+        sync: false # Set to https://<your-service-name>.onrender.com/oauth2callback
+      - key: MCP_AUTH_TOKEN
+        generateValue: true # Render will automatically generate a secure 32-character token
+      - key: DB_PATH
+        value: /var/data/mcp.sqlite
