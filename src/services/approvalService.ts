@@ -2,10 +2,11 @@ import { createPendingAction, getPendingAction, updateActionStatus } from '../pe
 import { AppError, ErrorCodes } from '../utils/errors';
 import { sendEmail } from './gmailService';
 import { appendText } from './docsService';
+import { getBaseUrl } from '../utils/config';
 
 export const createApprovalRequest = async (accountId: string, actionType: string, previewPayload: any) => {
   const pending = await createPendingAction(accountId, actionType, previewPayload);
-  const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+  const baseUrl = getBaseUrl();
   
   return {
     status: 'pending_approval',

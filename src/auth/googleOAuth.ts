@@ -1,11 +1,12 @@
 import { google } from 'googleapis';
 import { getTokens, saveTokens } from './tokenStore';
 import { logger } from '../utils/logging';
+import { getRedirectUri } from '../utils/config';
 
 export const getOAuthClient = () => {
   const clientId = process.env.GOOGLE_CLIENT_ID;
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
-  const redirectUri = process.env.GOOGLE_REDIRECT_URI;
+  const redirectUri = getRedirectUri();
 
   if (!clientId || !clientSecret || !redirectUri) {
     throw new Error('Google OAuth configuration is missing in environment variables');
